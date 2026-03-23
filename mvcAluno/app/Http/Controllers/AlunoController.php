@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Aluno;
 
-use Illumiinate\Http\Request;
+use Illuminate\Http\Request;
 
 class AlunoController extends Controller
 {
@@ -12,4 +12,24 @@ class AlunoController extends Controller
         $alunos = $query->get();
         return view('listar', compact('alunos'));
     }
+    public function add(Request $request){
+        $request->validate([
+            'nome' => 'required|string|max:255',
+            'email'=> 'required|string|max:255|unique:alunos,email'
+        ]);
+
+        Aluno::create([
+            'nome' => $request->nome,
+            'email' => $request->email
+        ]);
+
+        return redirect()->back()->with('sucess','Aluno Cadastrado com sucesso!');
+    }
+
+    public function atualizar($id){
+        $aluno = Aluno::findOrFail($id); // Busca o aluno pelo ID
+        // select * from alunos where id = $id
+        return view('atualizar', compact('aluno'));
+    }
 }
+?>

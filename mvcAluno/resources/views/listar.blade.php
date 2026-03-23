@@ -18,11 +18,13 @@
             </tr>
         </thead>
         <tbody>
-            @forelse($alunos as $alunos)
+            @forelse($alunos as $aluno)
                 <tr>
                     <td>{{ $aluno->id}}</td>
                     <td>{{ $aluno->nome}}</td>
-                    <td> Faremos na próxima aula </td>
+                    <td> 
+                        <a href="{{route('aluno.atualizar', $aluno->id)}}">Atualizar</a>
+                    </td>
                     <td> Faremos na próxima aula </td>
                 </tr>
             @empty

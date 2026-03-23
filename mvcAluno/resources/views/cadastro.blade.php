@@ -12,7 +12,7 @@
         <p style="dcolor:green">{{ session('success')}}</p>
     @endif
 
-    <form action="">
+    <form action="{{route('aluno.salvar')}}" method="POST">
         @csrf
         <label for="nome">Nome: </label>
         <input type="text" name="nome" id="nome" placeholder="Nome..."
@@ -24,13 +24,13 @@
             required value="{{ old('email') }}"
         >
 
-        <imput type="Submit" value="Cadastra">
+        <input type="Submit" value="Cadastrar">
     </form>
 
-    @if($erros->any())
+    @if($errors->any())
         <div style="color:red">
             <ul>
-                @foreach ($erros->all() as $err)
+                @foreach ($errors->all() as $erro)
                     <li>{{ $erro }}</li>
                 @endforeach
             </ul>
