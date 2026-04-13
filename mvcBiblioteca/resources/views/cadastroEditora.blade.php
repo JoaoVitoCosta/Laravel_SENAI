@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_','-',app()->getLocale()) }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Editora</title>
+</head>
+<body>
+    <h1>Cadastro Editora</h1>
+
+    @if(session('sucess'))
+        <p style="color:green">{{ session('sucess')}}</p>
+    @endif
+
+    <form action="{{ route('editora.salvar') }}" method="POST">
+        @csrf
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" id="nome" placeholder="Nome da Editora..." require value="{{old('nome')}}">
+        <br><br>
+
+        <label for="cnpj">CNPJ:</label>
+        <input type="number" name="cnpj" id="cnpj" placeholder="CNPJ..." require value="{{old('cnpj')}}">
+        
+        <label for="pais">País<select name="" id="" disabled="disabled"></select>:</label>
+        <input type="text" name="pais" id="pais" placeholder="País da Editora..." require value="{{old('pais')}}">
+
+        <label for="cidade">Cidade:</label>
+        <input type="text" name="cidade" id="cidade" placeholder="Cidade..." require value="{{old('cidade')}}">
+        
+        <input type="submit" value="Cadastrar">
+    </form>
+
+    @if($errors->any())
+        <div style="color:red">
+            <ul>
+                @foreach ($errors->all() as $erro)
+                    <li>{{ $erro }}</li>
+                @endforeach
+            </ul>
+
+        </div>
+    @endif
+</body>
+</html> 
